@@ -1,0 +1,98 @@
+<resources>
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/act_anim_style</item>
+    </style>
+
+
+    <style name="act_anim_style" parent="@android:style/Animation">
+        <!-- 新Activity 进入 -->
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
+        <!-- 旧Activity退出 -->
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
+        <!-- 新Activity退出 -->
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
+        <!-- 旧Activity进入 -->
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
+
+    </style>
+
+    <style name="footer_bar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@null</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="main_footer_radio" parent="footer_bar">
+        <!--<item name="android:drawablePadding">2dp</item>-->
+        <item name="android:textSize">16sp</item>
+        <!--<item name="android:textColor">@drawable/footer_text_color</item>-->
+        <item name="android:paddingTop">8dp</item>
+    </style>
+
+    <style name="splashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/splash_logo_list</item>
+
+    </style>
+
+    <style name="my_et" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/layout_bg_color</item>
+        <item name="colorControlActivated">@color/layout_bg_color</item>
+    </style>
+
+    <style name="my_et_2dp" parent="my_et">
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_color</item>
+    </style>
+
+    <style name="BottomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@style/BottomDialog.AnimationStyle</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+    <style name="BottomDialog.AnimationStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_to_bottom</item>
+    </style>
+
+    <style name="actionBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/primary_text_light</item>
+    </style>
+
+    <style name="customTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionBarTheme">@style/actionBarTheme</item>
+        <item name="colorPrimary">#FFA500</item>
+        <item name="colorPrimaryDark">#CCa500</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>//无标题
+        <item name="android:windowActionBar">false</item>//无ActionBar
+        <item name="android:windowFullscreen">true</item>//全屏即无通知栏
+        <item name="android:windowContentOverlay">@null</item>//是否有遮盖
+    </style>
+
+    <style name="CustomTitleTextAppearance">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="translucent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+</resources>

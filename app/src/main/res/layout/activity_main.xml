@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/main_frame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divide_line"
+            android:background="@color/layout_bg_color" />
+
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="#FFFFFF"
+            app:bb_activeTabColor="@color/colorPrimary"
+            app:bb_behavior="shifting"
+            app:bb_inActiveTabAlpha="0.3"
+            app:bb_inActiveTabColor="@color/text_light"
+            app:bb_tabXmlResource="@xml/bottom_tabs"
+            app:bb_titleTextAppearance="@style/CustomTitleTextAppearance" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

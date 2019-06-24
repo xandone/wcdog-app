@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_video_img"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/text_black" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/play_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/item_video_img"
+        app:layout_constraintLeft_toLeftOf="@+id/item_video_img"
+        app:layout_constraintRight_toRightOf="@+id/item_video_img"
+        app:layout_constraintTop_toTopOf="@+id/item_video_img" />
+
+    <TextView
+        android:id="@+id/item_video_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/text_black"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_video_img"
+        tools:text="google机器人" />
+
+    <TextView
+        android:id="@+id/item_video_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/text_light"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_video_title"
+        tools:text="02'40''" />
+
+</android.support.constraint.ConstraintLayout>

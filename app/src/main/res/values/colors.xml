@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#D5B867</color>
+    <color name="colorPrimaryDark">#C09B33</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="black">#FF000000</color>
+    <color name="red">#FFFF0000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="text_black">#333</color>
+    <color name="text_normal">#6A6868</color>
+    <color name="text_light">#A0A6A5</color>
+    <color name="hint_normal">#999</color>
+    <color name="layout_bg_color">#F6F6F6</color>
+
+    <color name="toast_white">#ffffff</color>
+    <color name="toast_stroke_gray">#99d4d4d4</color>
+    <color name="divide_line">#ccc</color>
+    <color name="ll_press_line">#CFF1F2</color>
+</resources>

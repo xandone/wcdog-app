@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">wcdog-app</string>
+
+    <string name="x_joke_title">帖子</string>
+    <string name="x_img_title">图片</string>
+    <string name="x_video_title">视频</string>
+    <string name="x_img_details_title">图片详情</string>
+    <string name="x_login_title">登录</string>
+    <string name="x_regist_title">注册</string>
+    <string name="x_details_title">详情</string>
+    <string name="x_personal_title">个人信息</string>
+    <string name="x_bar_title">论坛</string>
+    <string name="x_joke_comment_title">评论详情</string>
+    <string name="x_joke_add">添加笑话</string>
+    <string name="s_about">关于</string>
+    <string name="s_city">城市</string>
+    <string name="s_collection">收藏</string>
+    <string name="s_set">设置</string>
+    <string name="s_exit">退出</string>
+    <string name="s_name">狗蛋</string>
+    <string name="s_have_thimb">老铁你已经点赞了</string>
+    <string name="s_delete">删除</string>
+    <string name="s_no_login">您还未登录,请先登录</string>
+</resources>
