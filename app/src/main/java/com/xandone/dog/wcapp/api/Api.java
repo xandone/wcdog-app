@@ -45,5 +45,5 @@ public interface Api {
     Flowable<BaseResponse<List<JokeBean>>> getJokeList(
             @Query("page") int page,
             @Query("row") int count,
-            @Query("tag") int tag);
+            @Query("tag") String tag);
 }

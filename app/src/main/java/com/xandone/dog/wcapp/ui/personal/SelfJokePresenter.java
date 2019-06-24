@@ -1,13 +1,11 @@
-package com.xandone.dog.wcapp.ui.joke;
-
+package com.xandone.dog.wcapp.ui.personal;
 
 import com.xandone.dog.wcapp.api.CommonSubscriber;
 import com.xandone.dog.wcapp.base.RxPresenter;
 import com.xandone.dog.wcapp.model.DataManager;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
-import com.xandone.dog.wcapp.model.bean.HeadArticleBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
-import com.xandone.dog.wcapp.model.bean.JokeListBean;
+import com.xandone.dog.wcapp.ui.joke.JokeContact;
 
 import java.util.List;
 
@@ -19,20 +17,19 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * author: xandone
- * created on: 2019/3/13 9:26
+ * created on: 2019/6/24 23:09
  */
-
-public class JokePresenter extends RxPresenter<JokeContact.View> implements JokeContact.Presenter {
+public class SelfJokePresenter extends RxPresenter<SelfJokeContact.MyView> implements SelfJokeContact.Presenter {
     private DataManager dataManager;
 
     @Inject
-    public JokePresenter(DataManager dataManager) {
+    public SelfJokePresenter(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
     @Override
-    public void getJokeList(int page, int count, final int mode) {
-        Flowable<BaseResponse<List<JokeBean>>> result = dataManager.getJokeList(page, count, "-1");
+    public void getJokeList(int page, int count, String tag, final int mode) {
+        Flowable<BaseResponse<List<JokeBean>>> result = dataManager.getJokeList(page, count, tag);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<JokeBean>>>(view) {
@@ -48,5 +45,4 @@ public class JokePresenter extends RxPresenter<JokeContact.View> implements Joke
                 })
         );
     }
-
 }

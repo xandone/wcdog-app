@@ -103,7 +103,6 @@ public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeC
         fragJokeList.setAdapter(mAdapter);
         fragJokeList.setLayoutManager(new LinearLayoutManager(App.sContext));
 
-        mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
         loadingLayout.setLoadingTips(LoadingLayout.loading);
 
         onReloadListener = new LoadingLayout.OnReloadListener() {
@@ -132,6 +131,8 @@ public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeC
             }
 
         });
+
+        mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
 
     }
 

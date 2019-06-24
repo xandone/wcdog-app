@@ -29,8 +29,8 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count) {
-        return mHttpHelper.getJokeList(page, count);
+    public Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count,String tag) {
+        return mHttpHelper.getJokeList(page, count,tag);
     }
 
     @Override

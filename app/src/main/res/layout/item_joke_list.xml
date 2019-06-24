@@ -35,44 +35,47 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/item_joke_list_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/text_normal"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_joke_user_ll"
-        tools:text="笑话标题" />
 
     <ImageView
         android:id="@+id/item_joke_coverImg"
         android:layout_width="120dp"
-        android:layout_height="75dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_joke_list_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_joke_user_ll"
         tools:background="@mipmap/wc_app" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="90dp"
         android:layout_marginLeft="5dp"
         app:layout_constraintLeft_toRightOf="@+id/item_joke_coverImg"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_joke_list_title">
+        app:layout_constraintTop_toBottomOf="@+id/item_joke_user_ll">
+
+        <TextView
+            android:id="@+id/item_joke_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_normal"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="笑话标题" />
 
         <TextView
             android:id="@+id/item_joke_list_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:lineSpacingMultiplier="1.2"
             android:maxLines="2"
             android:textColor="@color/text_light"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_joke_list_title"
             tools:text="笑话笑话内容笑话内笑话笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容内容容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容笑话内容内容" />
 
         <TextView
@@ -82,6 +85,7 @@
             android:layout_marginTop="10dp"
             android:drawableLeft="@mipmap/approval"
             android:drawablePadding="2dp"
+            android:gravity="center_vertical"
             android:textColor="@color/hint_normal"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +93,6 @@
             tools:text="26" />
 
         <TextView
-
             android:id="@+id/item_joke_list_comment_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,6 +100,7 @@
             android:layout_marginTop="10dp"
             android:drawableLeft="@mipmap/comment_ic"
             android:drawablePadding="2dp"
+            android:gravity="center_vertical"
             android:textColor="@color/hint_normal"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/hint_normal"
-            android:textSize="14sp"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             tools:text="2018-3-12" />

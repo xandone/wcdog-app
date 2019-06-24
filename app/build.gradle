@@ -57,6 +57,7 @@ dependencies {
     implementation rootProject.ext.dependencies["bottom-bar"]
     implementation rootProject.ext.dependencies["shinebutton"]
     implementation rootProject.ext.dependencies["banner"]
+    implementation rootProject.ext.dependencies["flycoTabLayout"]
 
     //rx
     implementation rootProject.ext.dependencies["rxjava"]

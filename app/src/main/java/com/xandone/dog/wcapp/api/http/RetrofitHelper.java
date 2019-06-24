@@ -38,8 +38,8 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count) {
-        return mApi.getJokeList(page, count, -1);
+    public Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count, String tag) {
+        return mApi.getJokeList(page, count, tag);
     }
 
     @Override

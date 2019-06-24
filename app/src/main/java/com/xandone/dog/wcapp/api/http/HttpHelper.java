@@ -21,7 +21,7 @@ public interface HttpHelper {
 
     Flowable<BaseResponse<List<UserBean>>> login(String name, String psw);
 
-    Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count);
+    Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count,String tag);
 
     Flowable<VideoInfo> getVideoList(Map<String, String> map);
 
