@@ -1,4 +1,4 @@
-package com.xandone.dog.wcapp.ui.login;
+package com.xandone.dog.wcapp.ui.regist;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import com.xandone.dog.wcapp.cache.UserInfoCache;
 import com.xandone.dog.wcapp.eventbus.SimpleEvent;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
 import com.xandone.dog.wcapp.model.bean.UserBean;
-import com.xandone.dog.wcapp.ui.regist.RegistActivity;
 import com.xandone.dog.wcapp.uitils.AnimUtils;
 import com.xandone.dog.wcapp.uitils.SimpleUtils;
 import com.xandone.dog.wcapp.uitils.ToastUtils;
@@ -34,18 +33,21 @@ import butterknife.OnClick;
 
 /**
  * author: xandone
- * created on: 2019/3/6 15:09
+ * created on: 2019/3/6 20:16
  */
 
-public class LoginActivity extends BaseRxActivity<LoginPresenter> implements LoginContact.View, KeyboardWatcher.SoftKeyboardStateListener {
-    @BindView(R.id.act_login_et_email)
-    EditText act_login_et_email;
-    @BindView(R.id.act_login_et_psw)
-    EditText act_login_et_psw;
+public class RegistActivity extends BaseRxActivity<RegistPresenter> implements RegistContact.View, KeyboardWatcher.SoftKeyboardStateListener {
+    @BindView(R.id.act_regist_et_name)
+    EditText act_regist_et_name;
+    @BindView(R.id.act_regist_et_psw)
+    EditText act_regist_et_psw;
+    @BindView(R.id.act_regist_et_nick)
+    EditText act_regist_et_nick;
     @BindView(R.id.body)
     ConstraintLayout body;
-    @BindView(R.id.act_login_title)
-    DrawableTextView act_login_title;
+    @BindView(R.id.act_regist_title)
+    DrawableTextView act_regist_title;
+
 
     private KeyboardWatcher keyboardWatcher;
 
@@ -56,7 +58,7 @@ public class LoginActivity extends BaseRxActivity<LoginPresenter> implements Log
 
     @Override
     public int setLayout() {
-        return R.layout.act_login_layout;
+        return R.layout.act_regist_layout;
     }
 
     @Override
@@ -67,25 +69,26 @@ public class LoginActivity extends BaseRxActivity<LoginPresenter> implements Log
         keyboardWatcher.addSoftKeyboardStateListener(this);
     }
 
-    @OnClick({R.id.act_login_regist, R.id.act_login_btn, R.id.close})
+    @OnClick({R.id.act_regist_btn, R.id.close})
     public void click(View view) {
         switch (view.getId()) {
-            case R.id.act_login_regist:
-                SimpleUtils.hideSoftInput(this);
-                startActivity(new Intent(LoginActivity.this, RegistActivity.class));
-                break;
-            case R.id.act_login_btn:
-                String email = act_login_et_email.getText().toString().trim();
-                String psw = act_login_et_psw.getText().toString().trim();
+            case R.id.act_regist_btn:
+                String email = act_regist_et_name.getText().toString().trim();
+                String psw = act_regist_et_psw.getText().toString().trim();
+                String nick = act_regist_et_nick.getText().toString().trim();
                 if (XString.isEmpty(email)) {
-                    ToastUtils.showShort("请输入账号");
+                    ToastUtils.showShort("请输入用户名");
                     return;
                 }
-                if (XString.isEmpty(psw)) {
-                    ToastUtils.showShort("请输入密码");
+                if (XString.isEmpty(psw) || !XString.isPassword(psw)) {
+                    ToastUtils.showShort("请输入6-16位数字/英文密码");
                     return;
                 }
-                mPresenter.login(email, psw);
+                if (XString.isEmpty(nick)) {
+                    ToastUtils.showShort("请输入昵称");
+                    return;
+                }
+                mPresenter.regist(email, psw, nick);
                 break;
             case R.id.close:
                 finish();
@@ -99,8 +102,8 @@ public class LoginActivity extends BaseRxActivity<LoginPresenter> implements Log
     public void showContent(BaseResponse<List<UserBean>> baseResponse) {
         if (UserInfoCache.isLogin()) {
             SimpleUtils.hideSoftInput(this);
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_LOGIN);
+            Intent intent = new Intent(RegistActivity.this, MainActivity.class);
+            intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_REGIST);
             startActivity(intent);
             EventBus.getDefault().post(new SimpleEvent(SimpleEvent.KEY_INIT_USER));
         } else if (!TextUtils.isEmpty(baseResponse.getMsg())) {
@@ -108,14 +111,8 @@ public class LoginActivity extends BaseRxActivity<LoginPresenter> implements Log
         } else {
             ToastUtils.showShort("服务器异常,请稍后再试");
         }
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        keyboardWatcher.removeSoftKeyboardStateListener(this);
     }
-
 
     @Override
     public void onSoftKeyboardOpened(int keyboardSize) {
@@ -129,7 +126,7 @@ public class LoginActivity extends BaseRxActivity<LoginPresenter> implements Log
             mAnimatorTranslateY.setDuration(300);
             mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
             mAnimatorTranslateY.start();
-            AnimUtils.zoomIn(act_login_title, keyboardSize - bottom, 0.8f);
+            AnimUtils.zoomIn(act_regist_title, keyboardSize - bottom, 0.8f);
 
         }
     }
@@ -140,6 +137,6 @@ public class LoginActivity extends BaseRxActivity<LoginPresenter> implements Log
         mAnimatorTranslateY.setDuration(300);
         mAnimatorTranslateY.setInterpolator(new AccelerateDecelerateInterpolator());
         mAnimatorTranslateY.start();
-        AnimUtils.zoomOut(act_login_title, 0.8f);
+        AnimUtils.zoomOut(act_regist_title, 0.8f);
     }
 }

@@ -1,8 +1,10 @@
 package com.xandone.dog.wcapp;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -47,6 +49,11 @@ public class MainActivity extends BaseRxActivity {
     @Override
     public int setLayout() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
     }
 
     @Override

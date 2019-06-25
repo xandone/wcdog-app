@@ -87,7 +87,7 @@ dependencies {
     implementation rootProject.ext.dependencies["Luban"]
     implementation rootProject.ext.dependencies["filedownloader"]
     implementation rootProject.ext.dependencies["okdownloadSqlite"]
-    implementation rootProject.ext.dependencies["greendao"]
+    implementation rootProject.ext.dependencies["eventbus"]
 
     //canary
     debugImplementation rootProject.ext.dependencies["blockcanary-android"]

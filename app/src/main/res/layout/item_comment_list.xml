@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <com.xandone.dog.wcapp.widget.UserCircleIcon
+        android:id="@+id/item_joke_comment_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@mipmap/df_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_joke_comment_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/text_black"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@id/item_joke_comment_icon"
+        tools:text="大牛" />
+
+    <TextView
+        android:id="@+id/item_joke_comment_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/text_normal"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@id/item_joke_comment_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_joke_comment_name"
+        tools:text="大牛说得对大牛说得对哦大牛说得对哦大牛说得对哦大牛说得对哦哦" />
+
+    <TextView
+        android:id="@+id/item_joke_comment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/hint_normal"
+        android:textSize="14sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_joke_comment_details"
+        tools:text="2018-3-15 21:28" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divide_line"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/layout_bg_color"
+        app:layout_constraintLeft_toRightOf="@+id/item_joke_comment_icon"
+        app:layout_constraintTop_toBottomOf="@+id/item_joke_comment_date" />
+
+</android.support.constraint.ConstraintLayout>

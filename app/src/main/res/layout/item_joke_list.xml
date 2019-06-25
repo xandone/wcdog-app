@@ -89,7 +89,7 @@
             android:textColor="@color/hint_normal"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             tools:text="26" />
 
         <TextView

@@ -2,6 +2,7 @@ package com.xandone.dog.wcapp.model;
 
 import com.xandone.dog.wcapp.api.http.HttpHelper;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
+import com.xandone.dog.wcapp.model.bean.CommentBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.bean.UserBean;
 import com.xandone.dog.wcapp.model.video.VideoInfo;
@@ -29,13 +30,38 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count,String tag) {
-        return mHttpHelper.getJokeList(page, count,tag);
+    public Flowable<BaseResponse<List<UserBean>>> regist(String name, String psw, String nickname) {
+        return mHttpHelper.regist(name, psw, nickname);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count, String tag) {
+        return mHttpHelper.getJokeList(page, count, tag);
     }
 
     @Override
     public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
         return mHttpHelper.getVideoList(map);
+    }
+
+    @Override
+    public Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId) {
+        return mHttpHelper.getThumbsJoke(jokeId, jokeUserId);
+    }
+
+    @Override
+    public Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId) {
+        return mHttpHelper.thumbsJoke(jokeId, jokeUserId);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<CommentBean>>> getJokeCommentList(int page, int rows, String jokeId) {
+        return mHttpHelper.getJokeCommentList(page, rows, jokeId);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<CommentBean>>> addComment(String jokeId, String userId, String details) {
+        return mHttpHelper.addComment(jokeId, userId, details);
     }
 
 

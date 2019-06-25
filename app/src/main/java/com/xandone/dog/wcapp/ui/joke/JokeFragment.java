@@ -25,6 +25,7 @@ import com.xandone.dog.wcapp.config.Constants;
 import com.xandone.dog.wcapp.model.bean.HeadArticleBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.bean.JokeListBean;
+import com.xandone.dog.wcapp.ui.jokedetails.JokeDetailsActivity;
 import com.xandone.dog.wcapp.uitils.imgload.XGlide;
 import com.xandone.dog.wcapp.widget.LoadingLayout;
 
@@ -39,7 +40,7 @@ import butterknife.OnClick;
  * created on: 2019/3/6 13:34
  */
 
-public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeContact.View {
+public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeContact.View, BaseQuickAdapter.OnItemClickListener {
     @BindView(R.id.frag_joke_list)
     RecyclerView fragJokeList;
     @BindView(R.id.refreshLayout)
@@ -75,7 +76,7 @@ public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeC
     public void initData() {
         super.initData();
 
-        setToolBar(toolBar, "笑话");
+        setToolBar(toolBar, "帖子");
 
         requestManager = Glide.with(mActivity);
         jokes = new ArrayList<>();
@@ -132,6 +133,8 @@ public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeC
 
         });
 
+        mAdapter.setOnItemClickListener(this);
+
         mPresenter.getJokeList(mPage, mCount, JokeContact.MODE_ONE);
 
     }
@@ -182,6 +185,14 @@ public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeC
         }
     }
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        Intent intent = new Intent(mActivity, JokeDetailsActivity.class);
+        intent.putExtra(Constants.KEY_JOKEBEAN, jokes.get(position));
+        intent.putExtra(Constants.KEY_JOKEBEAN_POSITION, position);
+        startActivityForResult(intent, JokeFragment.RQS_CODE_JOKEBEAN);
+    }
+
 
     @OnClick({R.id.toolbar_add})
     public void click(View view) {
@@ -205,4 +216,6 @@ public class JokeFragment extends BaseRxFragment<JokePresenter> implements JokeC
             updataDatas(isThumb, position);
         }
     }
+
+
 }

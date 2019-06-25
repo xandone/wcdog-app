@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import com.xandone.dog.wcapp.AppManager;
 import com.xandone.dog.wcapp.uitils.ProgressDialogUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 /**
@@ -39,8 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         AppManager.newInstance().removectivity(this);
+        super.onDestroy();
     }
 
     @Override

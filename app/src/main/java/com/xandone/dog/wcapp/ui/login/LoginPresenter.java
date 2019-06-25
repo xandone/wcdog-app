@@ -1,6 +1,6 @@
 package com.xandone.dog.wcapp.ui.login;
 
-import android.util.Log;
+import android.text.TextUtils;
 
 import com.xandone.dog.wcapp.api.CommonSubscriber;
 import com.xandone.dog.wcapp.base.RxPresenter;
@@ -65,10 +65,13 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
                             SPUtils spUtils = SPUtils.getInstance(Constants.USER_INFO_NAME);
                             String infoJson = GsonUtil.objToJson(userBean);
                             spUtils.put(Constants.USER_INFO_KEY, infoJson);
-
-                            Log.d("yandone", "login===" + infoJson);
+                            view.showContent(baseResponse);
+                        } else if (!TextUtils.isEmpty(baseResponse.getMsg())) {
+                            ToastUtils.showShort(baseResponse.getMsg());
+                        } else {
+                            ToastUtils.showShort("服务器异常,请稍后再试");
                         }
-                        view.showContent(baseResponse);
+
 
                     }
 

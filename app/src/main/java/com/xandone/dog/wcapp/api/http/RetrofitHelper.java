@@ -4,6 +4,7 @@ package com.xandone.dog.wcapp.api.http;
 import com.xandone.dog.wcapp.api.Api;
 import com.xandone.dog.wcapp.api.KyApi;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
+import com.xandone.dog.wcapp.model.bean.CommentBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.bean.UserBean;
 import com.xandone.dog.wcapp.model.video.VideoInfo;
@@ -38,6 +39,12 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
+    public Flowable<BaseResponse<List<UserBean>>> regist(String name, String psw, String nickname) {
+        return mApi.regist(name, psw, nickname);
+    }
+
+
+    @Override
     public Flowable<BaseResponse<List<JokeBean>>> getJokeList(int page, int count, String tag) {
         return mApi.getJokeList(page, count, tag);
     }
@@ -45,6 +52,26 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<VideoInfo> getVideoList(Map<String, String> map) {
         return mKyApi.getVideoList(map);
+    }
+
+    @Override
+    public Flowable<BaseResponse> getThumbsJoke(String jokeId, String jokeUserId) {
+        return mApi.getThumbsJoke(jokeId, jokeUserId);
+    }
+
+    @Override
+    public Flowable<BaseResponse> thumbsJoke(String jokeId, String jokeUserId) {
+        return mApi.thumbsJoke(jokeId, jokeUserId);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<CommentBean>>> getJokeCommentList(int page, int row, String jokeId) {
+        return mApi.getJokeCommentList(page, row, jokeId);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<CommentBean>>> addComment(String jokeId, String userId, String details) {
+        return mApi.addComment(jokeId, userId, details);
     }
 
 }

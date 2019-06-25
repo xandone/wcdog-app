@@ -10,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xandone.dog.wcapp.eventbus.SimpleEvent;
 import com.xandone.dog.wcapp.uitils.ProgressDialogUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 
@@ -37,6 +42,18 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     public abstract int setLayout();
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,6 +78,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         } else {
             isUIVisible = false;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageReceived(SimpleEvent event) {
     }
 
     public abstract void initData();

@@ -2,9 +2,6 @@ package com.xandone.dog.wcapp.model.video;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -128,12 +125,9 @@ public class VideoInfo implements Serializable {
             return itemType;
         }
 
-        @Entity
         public static class DataBean implements Serializable {
 
             private static final long serialVersionUID = -5284174036844462277L;
-
-            @Id
             private Long kyVideoId;
 
             private String dataType;
