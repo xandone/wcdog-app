@@ -28,8 +28,27 @@ public class SelfJokePresenter extends RxPresenter<SelfJokeContact.MyView> imple
     }
 
     @Override
-    public void getJokeList(int page, int count, String tag, final int mode) {
-        Flowable<BaseResponse<List<JokeBean>>> result = dataManager.getJokeList(page, count, tag);
+    public void getSelfJokes(int page, int count, String tag, final int mode) {
+        Flowable<BaseResponse<List<JokeBean>>> result = dataManager.getSelfJokes(page, count, tag);
+        addSubscrible(result.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new CommonSubscriber<BaseResponse<List<JokeBean>>>(view) {
+                    @Override
+                    public void onNext(BaseResponse<List<JokeBean>> jokeBean) {
+                        super.onNext(jokeBean);
+                        if (mode == JokeContact.MODE_ONE) {
+                            view.showContent(jokeBean.getData(), jokeBean.getTotal());
+                        } else if (mode == JokeContact.MODE_MORE) {
+                            view.showContentMore(jokeBean.getData(), jokeBean.getTotal());
+                        }
+                    }
+                })
+        );
+    }
+
+    @Override
+    public void getSelfThumbs(int page, int count, String tag, final int mode) {
+        Flowable<BaseResponse<List<JokeBean>>> result = dataManager.getSelfThumbs(page, count, tag);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<JokeBean>>>(view) {

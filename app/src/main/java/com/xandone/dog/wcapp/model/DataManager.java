@@ -64,5 +64,20 @@ public class DataManager implements HttpHelper {
         return mHttpHelper.addComment(jokeId, userId, details);
     }
 
+    @Override
+    public Flowable<BaseResponse<List<JokeBean>>> getSelfJokes(int page, int row, String userId) {
+        return mHttpHelper.getSelfJokes(page, row, userId);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<JokeBean>>> getSelfThumbs(int page, int row, String userId) {
+        return mHttpHelper.getSelfThumbs(page, row, userId);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<UserBean>>> updateUserInfo(String userId, String talk, String address) {
+        return mHttpHelper.updateUserInfo(userId, talk, address);
+    }
+
 
 }

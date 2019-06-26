@@ -72,4 +72,27 @@ public interface Api {
             @Field("userId") String userId,
             @Field("details") String details
     );
+
+    @FormUrlEncoded
+    @POST("user/userInfo/modify")
+    Flowable<BaseResponse<List<UserBean>>> updateUserInfo(
+            @Field("userId") String userId,
+            @Field("talk") String talk,
+            @Field("address") String address
+    );
+
+    @GET("user/selfJokes")
+    Flowable<BaseResponse<List<JokeBean>>> getSelfJokes(
+            @Query("page") int page,
+            @Query("row") int row,
+            @Query("userId") String userId
+    );
+
+    @GET("user/thumb")
+    Flowable<BaseResponse<List<JokeBean>>> getSelfThumbs(
+            @Query("page") int page,
+            @Query("row") int row,
+            @Query("userId") String userId
+    );
+
 }

@@ -12,10 +12,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xandone.dog.wcapp.R;
 import com.xandone.dog.wcapp.base.BaseRxFragment;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.video.VideoInfo;
+import com.xandone.dog.wcapp.ui.joke.JokeContact;
 import com.xandone.dog.wcapp.ui.videodetails.VideoDetailsActivity;
 import com.xandone.dog.wcapp.uitils.SimpleUtils;
 import com.xandone.dog.wcapp.uitils.imgload.XGlide;
@@ -39,6 +43,8 @@ public class VideoListFragment extends BaseRxFragment<VideoListPresenter> implem
     Toolbar toolbar;
     @BindView(R.id.loadingLayout)
     LoadingLayout loadingLayout;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout mRefreshLayout;
 
     private BaseQuickAdapter mAdapter;
     private List<VideoInfo.ItemListBean> datas;
@@ -97,6 +103,13 @@ public class VideoListFragment extends BaseRxFragment<VideoListPresenter> implem
             }
         };
         loadingLayout.setOnReloadListener(onReloadListener);
+
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                loadVideoList();
+            }
+        });
     }
 
     @Override
@@ -109,19 +122,17 @@ public class VideoListFragment extends BaseRxFragment<VideoListPresenter> implem
 
     }
 
-
     public void loadVideoList() {
         Map<String, String> map = new HashMap<>();
         map.put("num", "10");
         map.put("udid", "26868b32e808498db32fd51fb422d00175e179df");
         map.put("vc", "83");
-
         mPresenter.getVideoList(map);
-
     }
 
     @Override
     public void showContent(VideoInfo videoInfo) {
+        mRefreshLayout.finishRefresh();
         if (videoInfo == null
                 || videoInfo.getItemList() == null
                 || videoInfo.getItemList().isEmpty()) {

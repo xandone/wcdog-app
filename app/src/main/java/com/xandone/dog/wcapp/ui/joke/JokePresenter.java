@@ -31,8 +31,8 @@ public class JokePresenter extends RxPresenter<JokeContact.View> implements Joke
     }
 
     @Override
-    public void getJokeList(int page, int count, final int mode) {
-        Flowable<BaseResponse<List<JokeBean>>> result = dataManager.getJokeList(page, count, "-1");
+    public void getJokeList(int page, int count, String tag, final int mode) {
+        Flowable<BaseResponse<List<JokeBean>>> result = dataManager.getJokeList(page, count, tag);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<JokeBean>>>(view) {

@@ -7,6 +7,7 @@ package com.xandone.dog.wcapp.eventbus;
  */
 public class SimpleEvent {
     public static final int KEY_INIT_USER = 1;
+    public static final int KEY_CLEAR_USER = 2;
 
     private int key;
 

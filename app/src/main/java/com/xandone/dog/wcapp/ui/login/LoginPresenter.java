@@ -36,8 +36,8 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
     }
 
     @Override
-    public void login(final String email, final String psw) {
-        Flowable<BaseResponse<List<UserBean>>> result = mDataManager.login(email, psw);
+    public void login(final String name, final String psw) {
+        Flowable<BaseResponse<List<UserBean>>> result = mDataManager.login(name, psw);
         addSubscrible(result.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<UserBean>>>(view) {
@@ -57,7 +57,7 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
                         if (baseResponse.getCode() == 200 && baseResponse.getData() != null
                                 && !baseResponse.getData().isEmpty()) {
                             UserBean userBean = baseResponse.getData().get(0);
-                            userBean.setName(email);
+                            userBean.setName(name);
                             userBean.setPassword(psw);
                             UserInfoCache.setLogin(true);
                             UserInfoCache.setUserBean(userBean);

@@ -17,13 +17,13 @@ public interface JokeContact {
 
     interface View extends BaseView {
 
-        void showContent(List<JokeBean> jokeList,int total);
+        void showContent(List<JokeBean> jokeList, int total);
 
-        void showContentMore(List<JokeBean> jokeList,int total);
+        void showContentMore(List<JokeBean> jokeList, int total);
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getJokeList(int page, int count, int mode);
+        void getJokeList(int page, int count, String tag, int mode);
     }
 
 }

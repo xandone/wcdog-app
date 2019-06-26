@@ -1,12 +1,12 @@
 package com.xandone.dog.wcapp.ui.personal;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +20,7 @@ import com.xandone.dog.wcapp.R;
 import com.xandone.dog.wcapp.base.BaseRxFragment;
 import com.xandone.dog.wcapp.cache.UserInfoCache;
 import com.xandone.dog.wcapp.config.Constants;
+import com.xandone.dog.wcapp.eventbus.PersonalEvent;
 import com.xandone.dog.wcapp.eventbus.SimpleEvent;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
 import com.xandone.dog.wcapp.model.bean.UserBean;
@@ -27,6 +28,7 @@ import com.xandone.dog.wcapp.ui.login.LoginActivity;
 import com.xandone.dog.wcapp.uitils.SPUtils;
 import com.xandone.dog.wcapp.uitils.XString;
 import com.xandone.dog.wcapp.uitils.imgload.XGlide;
+
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -59,6 +61,10 @@ public class PersonalFragment extends BaseRxFragment<PersonalPresenter> implemen
     TextView infoTalk;
     @BindView(R.id.info_address)
     TextView infoAddress;
+    @BindView(R.id.self_joke_count)
+    TextView selfJokeCount;
+    @BindView(R.id.self_joke_thumb)
+    TextView selfJokeThumb;
 
     private RequestManager requestManager;
     private ArrayList<Fragment> fragments;
@@ -88,19 +94,14 @@ public class PersonalFragment extends BaseRxFragment<PersonalPresenter> implemen
         getFragmentComponent().inject(this);
     }
 
-    @OnClick({R.id.frag_info_login, R.id.info_exit, R.id.info_head_iv})
+    @OnClick({R.id.frag_info_login, R.id.info_edit, R.id.info_head_iv})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.frag_info_login:
                 startActivity(new Intent(mActivity, LoginActivity.class));
                 break;
-            case R.id.info_exit:
-                showDialog("退出登录后好，会清空用户本地的个人信息数据。\n是否退出登录?", "确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        logout();
-                    }
-                }, "取消", null);
+            case R.id.info_edit:
+                startActivity(new Intent(mActivity, PersonalEditActivity.class));
                 break;
             case R.id.info_head_iv:
                 break;
@@ -117,6 +118,17 @@ public class PersonalFragment extends BaseRxFragment<PersonalPresenter> implemen
             if (UserInfoCache.isLogin()) {
                 showUserInfo(true);
             }
+        } else if (event.getKey() == SimpleEvent.KEY_CLEAR_USER) {
+            showUserInfo(false);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSelfJokeReceived(PersonalEvent event) {
+        if (event.getType() == SelfJokeFragment.TYPE_SELF) {
+            selfJokeCount.setText(String.valueOf(event.getCount()));
+        } else if (event.getType() == SelfJokeFragment.TYPE_THUMB) {
+            selfJokeThumb.setText(String.valueOf(event.getCount()));
         }
     }
 
@@ -134,8 +146,8 @@ public class PersonalFragment extends BaseRxFragment<PersonalPresenter> implemen
         }
 
         fragments = new ArrayList<>();
-        fragments.add(new SelfJokeFragment());
-        fragments.add(new SelfJokeFragment());
+        fragments.add(SelfJokeFragment.newInstance(SelfJokeFragment.TYPE_SELF));
+        fragments.add(SelfJokeFragment.newInstance(SelfJokeFragment.TYPE_THUMB));
         mAdapter = new MyPagerAdapter(getFragmentManager());
         viewPager.setAdapter(mAdapter);
         tabLayout.setViewPager(viewPager);
@@ -160,24 +172,8 @@ public class PersonalFragment extends BaseRxFragment<PersonalPresenter> implemen
         XGlide.loadImage(requestManager, infoHeadIv, UserInfoCache.getUserBean().getUserIcon(), R.mipmap.df_icon);
     }
 
-    /**
-     * 退出登录清除用户信息
-     */
-    public void logout() {
-        showUserInfo(false);
-
-        SPUtils.getInstance(Constants.USER_INFO_NAME).remove(Constants.USER_INFO_KEY);
-        UserInfoCache.setLogin(false);
-        UserInfoCache.setUserBean(null);
-
-//        Intent intent = new Intent(mActivity, MainActivity.class);
-//        intent.putExtra(MainActivity.X_USER_RELOAD, MainActivity.USER_LOGOUT);
-//        startActivity(intent);
-    }
-
     @Override
-    public void showContent(BaseResponse<List<UserBean>> baseResponse) {
-        XGlide.loadImage(requestManager, infoHeadIv, baseResponse.getData().get(0).getUserIcon(), R.mipmap.df_icon);
+    public void showContent(BaseResponse baseResponse) {
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

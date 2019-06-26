@@ -41,6 +41,10 @@
             android:label="@string/x_joke_comment_title"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
+            android:name=".ui.personal.PersonalEditActivity"
+            android:label="@string/s_edit"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name=".ui.videodetails.VideoDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"

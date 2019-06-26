@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.xandone.dog.wcapp.di.module.FragmentModule;
 import com.xandone.dog.wcapp.di.scope.FragmentScope;
-import com.xandone.dog.wcapp.ui.joke.JokeFragment;
+import com.xandone.dog.wcapp.ui.joke.JokeTagFragment;
 import com.xandone.dog.wcapp.ui.personal.PersonalFragment;
 import com.xandone.dog.wcapp.ui.personal.SelfJokeFragment;
 import com.xandone.dog.wcapp.ui.video.VideoListFragment;
@@ -21,7 +21,7 @@ import dagger.Component;
 public interface FragmentComponent {
     Activity getActivity();
 
-    void inject(JokeFragment jokeFragment);
+    void inject(JokeTagFragment jokeFragment);
 
     void inject(VideoListFragment videoListFragment);
 

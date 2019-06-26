@@ -5,6 +5,7 @@ import com.xandone.dog.wcapp.di.scope.ActivityScope;
 import com.xandone.dog.wcapp.ui.comment.JokeCommentActivity;
 import com.xandone.dog.wcapp.ui.jokedetails.JokeDetailsActivity;
 import com.xandone.dog.wcapp.ui.login.LoginActivity;
+import com.xandone.dog.wcapp.ui.personal.PersonalEditActivity;
 import com.xandone.dog.wcapp.ui.personal.PersonalFragment;
 import com.xandone.dog.wcapp.ui.regist.RegistActivity;
 import com.xandone.dog.wcapp.ui.splash.SplashAvtivity;
@@ -28,5 +29,7 @@ public interface ActivityComponent {
     void inject(JokeDetailsActivity jokeDetailsActivity);
 
     void inject(JokeCommentActivity jokeCommentActivity);
+
+    void inject(PersonalEditActivity personalEditActivity);
 
 }

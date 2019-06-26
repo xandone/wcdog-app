@@ -130,15 +130,19 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/self_joke_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10" />
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="帖子"
-                                android:textColor="@color/text_light" />
+                                android:textColor="@color/text_light"
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -148,15 +152,19 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/self_joke_thumb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10" />
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="点赞"
-                                android:textColor="@color/text_light" />
+                                android:textColor="@color/text_light"
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -168,26 +176,29 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10" />
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="收藏"
-                                android:textColor="@color/text_light" />
+                                android:textColor="@color/text_light"
+                                android:textSize="14sp" />
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/info_exit"
+                        android:id="@+id/info_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="5dp"
-                        android:drawableRight="@mipmap/user_exit_ic"
+                        android:drawableRight="@mipmap/edit"
                         android:gravity="center_vertical"
                         android:padding="4dp"
-                        android:text="退出"
+                        android:text="编辑"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/info_head_iv"

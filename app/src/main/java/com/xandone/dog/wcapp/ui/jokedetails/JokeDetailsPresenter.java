@@ -6,7 +6,6 @@ import com.xandone.dog.wcapp.model.DataManager;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 
-import java.util.List;
 
 import javax.inject.Inject;
 

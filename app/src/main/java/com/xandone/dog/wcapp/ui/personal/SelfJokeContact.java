@@ -19,14 +19,16 @@ public interface SelfJokeContact {
 
     interface MyView extends BaseView {
 
-        void showContent(List<JokeBean> jokeList,int total);
+        void showContent(List<JokeBean> jokeList, int total);
 
-        void showContentMore(List<JokeBean> jokeList,int total);
+        void showContentMore(List<JokeBean> jokeList, int total);
     }
 
     interface Presenter extends BasePresenter<MyView> {
 
-        void getJokeList(int page, int count, String tag, int mode);
+        void getSelfJokes(int page, int count, String tag, int mode);
+
+        void getSelfThumbs(int page, int count, String tag, int mode);
 
     }
 }

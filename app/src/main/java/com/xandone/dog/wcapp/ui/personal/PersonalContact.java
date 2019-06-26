@@ -4,9 +4,7 @@ package com.xandone.dog.wcapp.ui.personal;
 import com.xandone.dog.wcapp.base.BasePresenter;
 import com.xandone.dog.wcapp.base.BaseView;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
-import com.xandone.dog.wcapp.model.bean.UserBean;
 
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -18,13 +16,15 @@ import okhttp3.MultipartBody;
 
 public interface PersonalContact {
     interface MyView extends BaseView {
-        void showContent(BaseResponse<List<UserBean>> baseResponse);
+        void showContent(BaseResponse response);
 
     }
 
     interface Presenter extends BasePresenter<MyView> {
 
         void changeUserIcon(Map<String, String> maps, MultipartBody.Part part);
+
+        void updateUserInfo(String talk, String address);
 
     }
 }

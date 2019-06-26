@@ -36,4 +36,11 @@ public interface HttpHelper {
 
     Flowable<BaseResponse<List<CommentBean>>> addComment(String jokeId, String userId, String details);
 
+    Flowable<BaseResponse<List<JokeBean>>> getSelfJokes(int page, int row, String userId);
+
+    Flowable<BaseResponse<List<JokeBean>>> getSelfThumbs(int page, int row, String userId);
+
+    Flowable<BaseResponse<List<UserBean>>> updateUserInfo(String userId, String talk, String address);
+
+
 }

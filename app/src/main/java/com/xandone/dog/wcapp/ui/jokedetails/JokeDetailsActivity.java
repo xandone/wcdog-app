@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -27,7 +26,6 @@ import com.xandone.dog.wcapp.uitils.XString;
 import com.xandone.dog.wcapp.uitils.imgload.XGlide;
 import com.xandone.dog.wcapp.widget.UserCircleIcon;
 
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -152,7 +150,7 @@ public class JokeDetailsActivity extends BaseRxActivity<JokeDetailsPresenter> im
     public void showContent(BaseResponse baseResponse) {
         if (baseResponse.getCode() == 200) {
             jokeLike.setCompoundDrawables(null, drawable1, null, null);
-        }else {
+        } else {
             jokeLike.setCompoundDrawables(null, drawable2, null, null);
         }
     }
@@ -161,6 +159,9 @@ public class JokeDetailsActivity extends BaseRxActivity<JokeDetailsPresenter> im
     public void thumbsJokeResult(BaseResponse baseResponse) {
         if (baseResponse.getCode() == 200) {
             ToastUtils.showShort("点赞成功");
+            jokeLike.setCompoundDrawables(null, drawable2, null, null);
+            jokeLike.setText(String.valueOf(jokeBean.getArticleLikeCount() + 1));
+
         } else if (!XString.isEmpty(baseResponse.getMsg())) {
             ToastUtils.showShort(baseResponse.getMsg());
         }

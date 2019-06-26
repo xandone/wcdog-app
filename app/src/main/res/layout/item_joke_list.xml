@@ -35,11 +35,24 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/item_joke_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_joke_user_ll"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_joke_user_ll"
+        tools:text="原创" />
+
 
     <ImageView
         android:id="@+id/item_joke_coverImg"
         android:layout_width="120dp"
         android:layout_height="80dp"
+        android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_joke_user_ll"
@@ -55,13 +68,14 @@
 
         <TextView
             android:id="@+id/item_joke_list_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/text_normal"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="笑话标题" />
 
