@@ -85,6 +85,11 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
+    public Flowable<BaseResponse<List<JokeBean>>> dealSearchJokes(int page, int row, String key) {
+        return mApi.dealSearchJokes(page, row, key);
+    }
+
+    @Override
     public Flowable<BaseResponse<List<UserBean>>> updateUserInfo(String userId, String talk, String address) {
         return mApi.updateUserInfo(userId, talk, address);
     }

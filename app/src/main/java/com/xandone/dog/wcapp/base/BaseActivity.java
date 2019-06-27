@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.xandone.dog.wcapp.AppManager;
+import com.xandone.dog.wcapp.eventbus.SimpleEvent;
 import com.xandone.dog.wcapp.uitils.ProgressDialogUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 
@@ -26,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
         doBefore();
         setContentView(setLayout());
+        EventBus.getDefault().register(this);
         ButterKnife.bind(this);
         AppManager.newInstance().addActivivty(this);
         initData();
@@ -42,7 +46,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     protected void onDestroy() {
         AppManager.newInstance().removectivity(this);
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReceived(SimpleEvent event) {
     }
 
     @Override

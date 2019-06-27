@@ -44,6 +44,11 @@
             android:name=".ui.personal.PersonalEditActivity"
             android:label="@string/s_edit"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:label="@string/s_search"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".ui.videodetails.VideoDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

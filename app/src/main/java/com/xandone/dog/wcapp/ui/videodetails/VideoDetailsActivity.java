@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xandone.dog.wcapp.R;
@@ -26,6 +27,8 @@ import cn.jzvd.JZVideoPlayerStandard;
 public class VideoDetailsActivity extends BaseRxActivity {
     @BindView(R.id.videoView)
     AJzVideoView mVideoView;
+    @BindView(R.id.description)
+    TextView description;
 
     private VideoInfo.ItemListBean mVideoInfo;
     private VideoBroadCast mVideoBroadCast;
@@ -63,6 +66,7 @@ public class VideoDetailsActivity extends BaseRxActivity {
 
     private void playVideo() {
         try {
+            description.setText(mVideoInfo.getData().getDescription());
             playVideo(mVideoInfo.getData().getTitle(), mVideoInfo.getData().getCover().getDetail(), mVideoInfo.getData().getPlayUrl());
         } catch (Exception e) {
 

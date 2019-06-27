@@ -75,6 +75,11 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
+    public Flowable<BaseResponse<List<JokeBean>>> dealSearchJokes(int page, int row, String key) {
+        return mHttpHelper.dealSearchJokes(page, row, key);
+    }
+
+    @Override
     public Flowable<BaseResponse<List<UserBean>>> updateUserInfo(String userId, String talk, String address) {
         return mHttpHelper.updateUserInfo(userId, talk, address);
     }

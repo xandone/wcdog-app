@@ -8,6 +8,7 @@ import com.xandone.dog.wcapp.ui.login.LoginActivity;
 import com.xandone.dog.wcapp.ui.personal.PersonalEditActivity;
 import com.xandone.dog.wcapp.ui.personal.PersonalFragment;
 import com.xandone.dog.wcapp.ui.regist.RegistActivity;
+import com.xandone.dog.wcapp.ui.search.SearchActivity;
 import com.xandone.dog.wcapp.ui.splash.SplashAvtivity;
 
 import dagger.Component;

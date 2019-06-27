@@ -24,6 +24,8 @@ public interface JokeContact {
 
     interface Presenter extends BasePresenter<View> {
         void getJokeList(int page, int count, String tag, int mode);
+
+        void dealSearchJokes(int page, int count, String key, int mode);
     }
 
 }

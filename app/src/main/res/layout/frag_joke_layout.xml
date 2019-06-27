@@ -5,63 +5,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/layout_bg_color"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolBar"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll"
-            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:titleTextColor="@color/white">
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/search_bg_shape"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <ImageView
-                android:id="@+id/toolbar_add"
-                android:layout_width="50dp"
+                android:id="@+id/search_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/search_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/search_tv"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="end"
-                android:layout_marginEnd="6dp"
-                android:contentDescription="@null"
-                android:padding="16dp" />
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="请输入搜索内容"
+                android:textColor="@color/hint_normal"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/search_iv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.v7.widget.Toolbar>
+        </android.support.constraint.ConstraintLayout>
 
 
-    </android.support.design.widget.AppBarLayout>
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
 
-    <com.flyco.tablayout.SlidingTabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#FFF8F8F8"
+            app:tl_tab_space_equal="true"
+            tl:tl_divider_color="#1A000000"
+            tl:tl_divider_padding="13dp"
 
-        app:tl_tab_space_equal="true"
-        tl:tl_divider_color="#1A000000"
-        tl:tl_divider_padding="13dp"
+            tl:tl_divider_width="0dp"
+            tl:tl_iconVisible="false"
+            tl:tl_indicator_color="@color/colorPrimary"
 
-        tl:tl_divider_width="0dp"
-        tl:tl_iconVisible="false"
-        tl:tl_indicator_color="@color/colorPrimary"
+            tl:tl_indicator_height="1.5dp"
+            tl:tl_indicator_width="16dp"
+            tl:tl_textBold="SELECT"
 
-        tl:tl_indicator_height="1.5dp"
-        tl:tl_indicator_width="16dp"
-        tl:tl_textBold="SELECT"
+            tl:tl_textSelectColor="@color/colorPrimary"
+            tl:tl_textUnselectColor="@color/text_light"
 
-        tl:tl_textSelectColor="@color/colorPrimary"
-        tl:tl_textUnselectColor="@color/text_light"
-
-        tl:tl_textsize="14sp" />
+            tl:tl_textsize="14sp" />
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/joke_main_vp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="8dp">
 
     </android.support.v4.view.ViewPager>
 

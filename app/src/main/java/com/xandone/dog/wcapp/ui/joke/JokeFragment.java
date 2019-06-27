@@ -1,18 +1,23 @@
 package com.xandone.dog.wcapp.ui.joke;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.xandone.dog.wcapp.R;
 import com.xandone.dog.wcapp.base.BaseRxFragment;
+import com.xandone.dog.wcapp.ui.search.SearchActivity;
+import com.xandone.dog.wcapp.uitils.ToastUtils;
+import com.xandone.dog.wcapp.uitils.XString;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * author: xandone
@@ -20,8 +25,6 @@ import butterknife.BindView;
  */
 
 public class JokeFragment extends BaseRxFragment {
-    @BindView(R.id.toolBar)
-    Toolbar toolBar;
     @BindView(R.id.joke_main_vp)
     ViewPager jokeMainVp;
     @BindView(R.id.tabLayout)
@@ -43,7 +46,6 @@ public class JokeFragment extends BaseRxFragment {
     @Override
     public void initData() {
         super.initData();
-        setToolBar(toolBar, "帖子");
         fragments = new ArrayList<>();
         fragments.add(JokeTagFragment.newInstance(JokeTagFragment.TYPE_JOKE_ALL));
         fragments.add(JokeTagFragment.newInstance(JokeTagFragment.TYPE_JOKE_CLASSIC));
@@ -76,4 +78,16 @@ public class JokeFragment extends BaseRxFragment {
             return fragments.get(position);
         }
     }
+
+    @OnClick({R.id.search_tv})
+    public void click(View view) {
+        switch (view.getId()) {
+            case R.id.search_tv:
+                startActivity(new Intent(mActivity, SearchActivity.class));
+                break;
+            default:
+                break;
+        }
+    }
+
 }

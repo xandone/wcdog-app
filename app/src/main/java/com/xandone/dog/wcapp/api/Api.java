@@ -95,4 +95,11 @@ public interface Api {
             @Query("userId") String userId
     );
 
+    @GET("joke/jokelist/foggy")
+    Flowable<BaseResponse<List<JokeBean>>> dealSearchJokes(
+            @Query("page") int page,
+            @Query("row") int row,
+            @Query("key") String key
+    );
+
 }

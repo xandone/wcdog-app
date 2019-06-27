@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.SearchEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -22,10 +23,13 @@ import com.xandone.dog.wcapp.R;
 import com.xandone.dog.wcapp.base.BaseActivity;
 import com.xandone.dog.wcapp.base.BaseRxFragment;
 import com.xandone.dog.wcapp.config.Constants;
+import com.xandone.dog.wcapp.eventbus.SearchCountEvent;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.ui.jokedetails.JokeDetailsActivity;
 import com.xandone.dog.wcapp.uitils.imgload.XGlide;
 import com.xandone.dog.wcapp.widget.LoadingLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +62,9 @@ public class JokeTagFragment extends BaseRxFragment<JokePresenter> implements Jo
     public static final String KEY_RQS_IS_THUMB = "key_rqs_is_thumb";
 
     private String mType;
+    private boolean isFromSearch;
+    private String mKey = "";
+
     public static final String TYPE_JOKE_ALL = "-1";
     public static final String TYPE_JOKE_CLASSIC = "0";
     public static final String TYPE_JOKE_YELLOW = "1";
@@ -65,12 +72,22 @@ public class JokeTagFragment extends BaseRxFragment<JokePresenter> implements Jo
     public static final String TYPE_JOKE_SHITE = "3";
     public static final String TYPE_JOKE_COLD = "4";
     public static final String TYPE_JOKE_KEY = "TYPE_JOKE_KEY";
+    public static final String TYPE_JOKE_SEARCH_KEY = "TYPE_JOKE_SEARCH_KEY";
 
     public static final String[] JOKE_CATEGORY = {"网络", "自创", "听说"};
 
     public static JokeTagFragment newInstance(String type) {
         Bundle bundle = new Bundle();
         bundle.putString(TYPE_JOKE_KEY, type);
+        JokeTagFragment fragment = new JokeTagFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static JokeTagFragment newInstance(String type, boolean isFromSearch) {
+        Bundle bundle = new Bundle();
+        bundle.putString(TYPE_JOKE_KEY, type);
+        bundle.putBoolean(TYPE_JOKE_SEARCH_KEY, isFromSearch);
         JokeTagFragment fragment = new JokeTagFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -90,6 +107,7 @@ public class JokeTagFragment extends BaseRxFragment<JokePresenter> implements Jo
     public void initData() {
         super.initData();
         mType = getArguments().getString(TYPE_JOKE_KEY);
+        isFromSearch = getArguments().getBoolean(TYPE_JOKE_SEARCH_KEY, false);
         requestManager = Glide.with(mActivity);
         jokes = new ArrayList<>();
         mAdapter = new BaseQuickAdapter<JokeBean, BaseViewHolder>(R.layout.item_joke_list, jokes) {
@@ -118,13 +136,15 @@ public class JokeTagFragment extends BaseRxFragment<JokePresenter> implements Jo
         fragJokeList.setAdapter(mAdapter);
         fragJokeList.setLayoutManager(new LinearLayoutManager(App.sContext));
 
-        loadingLayout.setLoadingTips(LoadingLayout.loading);
+        if (!isFromSearch) {
+            loadingLayout.setLoadingTips(LoadingLayout.loading);
+        }
 
         onReloadListener = new LoadingLayout.OnReloadListener() {
             @Override
             public void reLoad() {
                 mPage = 1;
-                mPresenter.getJokeList(mPage, mCount, mType, JokeContact.MODE_ONE);
+                loadData(JokeContact.MODE_ONE);
                 loadingLayout.setLoadingTips(LoadingLayout.loading);
             }
         };
@@ -134,7 +154,8 @@ public class JokeTagFragment extends BaseRxFragment<JokePresenter> implements Jo
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 mPage = 1;
-                mPresenter.getJokeList(mPage, mCount, mType, JokeContact.MODE_ONE);
+                loadData(JokeContact.MODE_ONE);
+
             }
         });
 
@@ -142,20 +163,41 @@ public class JokeTagFragment extends BaseRxFragment<JokePresenter> implements Jo
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 mPage++;
-                mPresenter.getJokeList(mPage, mCount, mType, JokeContact.MODE_MORE);
+                loadData(JokeContact.MODE_MORE);
             }
 
         });
 
         mAdapter.setOnItemClickListener(this);
 
-        mPresenter.getJokeList(mPage, mCount, mType, JokeContact.MODE_ONE);
+        if (!isFromSearch) {
+            loadData(JokeContact.MODE_ONE);
+        }
+    }
 
+    private void loadData(int mode) {
+        if (isFromSearch) {
+            mPresenter.dealSearchJokes(mPage, mCount, mKey, mode);
+        } else {
+            mPresenter.getJokeList(mPage, mCount, mType, mode);
+        }
+    }
+
+    public void loadData(String key, int mode) {
+        if (isFromSearch) {
+            mKey = key;
+            mPresenter.dealSearchJokes(mPage, mCount, key, mode);
+        } else {
+            mPresenter.getJokeList(mPage, mCount, mType, mode);
+        }
     }
 
     @Override
     public void showContent(List<JokeBean> jokeList, int total) {
         mRefreshLayout.finishRefresh();
+        if (isFromSearch) {
+            EventBus.getDefault().post(new SearchCountEvent(total));
+        }
         if (jokeList == null || jokeList.isEmpty()) {
             showMsg("无数据", LoadingLayout.empty);
             return;

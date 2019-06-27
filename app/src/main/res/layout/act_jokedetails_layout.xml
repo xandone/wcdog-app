@@ -1,100 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar_layout" />
-
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:titleTextColor="@color/white" />
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/joke_details_user"
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/joke_details_like"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/joke_details_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_card"
-            android:padding="10dp"
+            android:background="@color/white"
+            android:orientation="vertical"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-
-            <com.xandone.dog.wcapp.widget.UserCircleIcon
-                android:id="@+id/joke_details_user_icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/df_icon"
-                app:layout_constraintLeft_toLeftOf="parent" />
-
-            <TextView
-                android:id="@+id/joke_details_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="@+id/joke_details_user_icon"
-                app:layout_constraintRight_toRightOf="@+id/joke_details_user_icon"
-                app:layout_constraintTop_toBottomOf="@+id/joke_details_user_icon"
-                tools:text="二虎" />
-
-            <TextView
-                android:id="@+id/joke_details_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/text_black"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/joke_details_user_name"
-                app:layout_constraintLeft_toRightOf="@+id/joke_details_user_icon"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/joke_details_user_icon"
-                tools:text="吵架标题dfsdfsdfsdfds递四方速递大送到防电费范德萨发的发的发的说法" />
-
-        </android.support.constraint.ConstraintLayout>
-
-
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/joke_details_like"
-            app:layout_constraintTop_toBottomOf="@+id/joke_details_user" />
-
-        <TextView
-            android:id="@+id/joke_details_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@mipmap/approval"
-            android:gravity="center_horizontal"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:textColor="@color/text_light"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/joke_details_comment"
-            tools:text="12" />
-
-        <TextView
-            android:id="@+id/joke_details_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:drawableTop="@mipmap/comment_ic"
-            android:gravity="center_horizontal"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:textColor="@color/text_light"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            tools:text="20" />
+            app:layout_constraintTop_toBottomOf="@+id/toolBar">
 
-    </android.support.constraint.ConstraintLayout>
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-</LinearLayout>
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/joke_details_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <com.xandone.dog.wcapp.widget.UserCircleIcon
+                        android:id="@+id/joke_details_user_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@mipmap/df_icon"
+                        app:layout_constraintLeft_toLeftOf="parent" />
+
+                    <TextView
+                        android:id="@+id/joke_details_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp"
+                        app:layout_constraintLeft_toLeftOf="@+id/joke_details_user_icon"
+                        app:layout_constraintRight_toRightOf="@+id/joke_details_user_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/joke_details_user_icon"
+                        tools:text="二虎" />
+
+                    <TextView
+                        android:id="@+id/joke_details_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/text_black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/joke_details_user_name"
+                        app:layout_constraintLeft_toRightOf="@+id/joke_details_user_icon"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/joke_details_user_icon"
+                        tools:text="吵架标题dfsdfsdfsdfds递四方速递大送到防电费范德萨发的发的发的说法" />
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/joke_details_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/approval"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/text_light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/joke_details_comment"
+        tools:text="12" />
+
+    <TextView
+        android:id="@+id/joke_details_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:drawableTop="@mipmap/comment_ic"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/text_light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="20" />
+</android.support.constraint.ConstraintLayout>
