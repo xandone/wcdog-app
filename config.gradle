@@ -5,13 +5,13 @@ ext {
             buildToolsVersion: '27.0.3',
             applicationId    : "com.xandone.dog.wcapp",
             minSdkVersion    : 19,
-            targetSdkVersion : 22,
-            versionCode      : 100,
+            targetSdkVersion : 25,
+            versionCode      : 1,
             versionName      : "1.0.0"
     ]
 
     def dependVersion = [
-            support    : "25.3.0",
+            support    : "27.1.1",
             retrofit   : "2.2.0",
             okhttp     : "3.6.0",
             dagger2    : "2.0.2",
@@ -43,6 +43,7 @@ ext {
             "shinebutton"                  : "com.sackcentury:shinebutton:0.2.0",
             "banner"                       : "com.youth.banner:banner:1.4.10",
             "flycoTabLayout"               : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
+            "material-dialogs"             : "com.afollestad.material-dialogs:core:0.9.6.0",
 
             //rx
             "rxjava"                       : "io.reactivex.rxjava2:rxjava:2.0.7",

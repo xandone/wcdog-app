@@ -41,13 +41,11 @@ public class SplashPresenter extends RxPresenter<SplashContact.View> implements 
     @Override
     public void getContent(final String name, final String psw) {
         Flowable<BaseResponse<List<UserBean>>> result = mDataManager.login(name, psw);
-
         addSubscrible(result.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<BaseResponse<List<UserBean>>>() {
                             @Override
                             public void accept(@NonNull BaseResponse<List<UserBean>> baseResponse) throws Exception {
-
                                 if (!SimpleUtils.isNetworkConnected()) {
                                     ToastUtils.showShort("没有网络");
                                     startAct();
@@ -56,8 +54,7 @@ public class SplashPresenter extends RxPresenter<SplashContact.View> implements 
 
                                 if (baseResponse != null) {
 //                                     密码正确
-                                    if (baseResponse.getCode() == 200 && baseResponse.getData() != null
-                                            && !baseResponse.getData().isEmpty()) {
+                                    if (baseResponse.getCode() == 200 && !SimpleUtils.isEmpty(baseResponse.getData())) {
                                         UserBean result = baseResponse.getData().get(0);
                                         result.setName(name);
                                         result.setPassword(psw);

@@ -50,19 +50,13 @@ public class PersonalPresenter extends RxPresenter<PersonalContact.MyView> imple
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<UserBean>>>(view) {
                     @Override
-                    public void onNext(BaseResponse<List<UserBean>> baseResponse) {
-
-                        if (!SimpleUtils.isNetworkConnected()) {
-                            ToastUtils.showShort("没有网络");
-                            return;
-                        }
-                        if (baseResponse == null) {
+                    public void onSuccess(BaseResponse<List<UserBean>> baseResponse) {
+                        if (baseResponse == null || SimpleUtils.isEmpty(baseResponse.getData())) {
                             ToastUtils.showShort("服务器异常,请稍后再试");
                             return;
                         }
 
-                        if (baseResponse.getCode() == 200 && baseResponse.getData() != null
-                                && !baseResponse.getData().isEmpty()) {
+                        if (baseResponse.getCode() == 200) {
                             UserBean userBean = baseResponse.getData().get(0);
                             UserInfoCache.setLogin(true);
                             UserInfoCache.setUserBean(userBean);

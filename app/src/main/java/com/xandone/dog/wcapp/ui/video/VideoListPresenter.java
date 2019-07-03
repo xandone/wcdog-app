@@ -36,7 +36,7 @@ public class VideoListPresenter extends RxPresenter<VideoContact.MyView> impleme
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<VideoInfo>(view) {
                     @Override
-                    public void onNext(VideoInfo videoInfo) {
+                    public void onSuccess(VideoInfo videoInfo) {
                         view.showContent(videoInfo);
                     }
 

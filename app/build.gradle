@@ -31,18 +31,16 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
-
     //base
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["recyclerview-v7"]
     implementation rootProject.ext.dependencies["cardview-v7"]
-
     //ui
     implementation rootProject.ext.dependencies["material-calendarview"]
     implementation rootProject.ext.dependencies["materialsearchview"]
@@ -58,11 +56,10 @@ dependencies {
     implementation rootProject.ext.dependencies["shinebutton"]
     implementation rootProject.ext.dependencies["banner"]
     implementation rootProject.ext.dependencies["flycoTabLayout"]
-
+    implementation rootProject.ext.dependencies["material-dialogs"]
     //rx
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]
-
     //network
     implementation rootProject.ext.dependencies["gson"]
     implementation rootProject.ext.dependencies["retrofit"]
@@ -72,14 +69,12 @@ dependencies {
     implementation rootProject.ext.dependencies["okhttp-logging-interceptor"]
     implementation rootProject.ext.dependencies["glide"]
     implementation rootProject.ext.dependencies["glide-okhttp3-integration"]
-
     //di
     implementation rootProject.ext.dependencies["dagger"]
     implementation rootProject.ext.dependencies["dagger-compiler"]
     implementation rootProject.ext.dependencies["butterknife"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     compileOnly rootProject.ext.dependencies["annotation"]
-
     //other
     implementation rootProject.ext.dependencies["multidex"]
     implementation rootProject.ext.dependencies["logger"]
@@ -88,13 +83,11 @@ dependencies {
     implementation rootProject.ext.dependencies["filedownloader"]
     implementation rootProject.ext.dependencies["okdownloadSqlite"]
     implementation rootProject.ext.dependencies["eventbus"]
-
     //canary
     debugImplementation rootProject.ext.dependencies["blockcanary-android"]
     releaseImplementation rootProject.ext.dependencies["blockcanary-no-op"]
     debugImplementation rootProject.ext.dependencies["leakcanary-android"]
     releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
-
     //module
     implementation project(path: ':jiaozivideoplayer')
     implementation project(path: ':ijkplayer')

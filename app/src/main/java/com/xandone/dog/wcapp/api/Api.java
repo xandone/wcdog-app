@@ -1,6 +1,7 @@
 package com.xandone.dog.wcapp.api;
 
 import com.xandone.dog.wcapp.model.base.BaseResponse;
+import com.xandone.dog.wcapp.model.bean.ApkBean;
 import com.xandone.dog.wcapp.model.bean.CommentBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.bean.UserBean;
@@ -101,5 +102,8 @@ public interface Api {
             @Query("row") int row,
             @Query("key") String key
     );
+
+    @GET("apk/checkversion")
+    Flowable<BaseResponse<List<ApkBean>>> getLastVersion();
 
 }

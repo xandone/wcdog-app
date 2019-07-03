@@ -34,8 +34,7 @@ public class SelfJokePresenter extends RxPresenter<SelfJokeContact.MyView> imple
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<JokeBean>>>(view) {
                     @Override
-                    public void onNext(BaseResponse<List<JokeBean>> jokeBean) {
-                        super.onNext(jokeBean);
+                    public void onSuccess(BaseResponse<List<JokeBean>> jokeBean) {
                         if (mode == JokeContact.MODE_ONE) {
                             view.showContent(jokeBean.getData(), jokeBean.getTotal());
                         } else if (mode == JokeContact.MODE_MORE) {
@@ -53,8 +52,7 @@ public class SelfJokePresenter extends RxPresenter<SelfJokeContact.MyView> imple
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<JokeBean>>>(view) {
                     @Override
-                    public void onNext(BaseResponse<List<JokeBean>> jokeBean) {
-                        super.onNext(jokeBean);
+                    public void onSuccess(BaseResponse<List<JokeBean>> jokeBean) {
                         if (mode == JokeContact.MODE_ONE) {
                             view.showContent(jokeBean.getData(), jokeBean.getTotal());
                         } else if (mode == JokeContact.MODE_MORE) {

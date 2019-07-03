@@ -24,30 +24,32 @@ public class Constants {
      * getExternalFilesDir/getExternalCacheDir：mnt/sdcard/Android/data/< package name >/files/…
      */
 
-
     //================= PATH ====================
 
     public static final String PATH_DATA = App.sContext.getCacheDir().getAbsolutePath() + File.separator + "data";
 
-    public static final String PATH_CACHE = PATH_DATA + "/ycatCache";
+    public static final String PATH_CACHE = PATH_DATA + "/wcdogCache";
 
-    public static final String PATH_CACHE_EXTERNAL = App.sContext.getExternalCacheDir() + File.separator + "ycat" + File.separator;
+    public static final String PATH_CACHE_EXTERNAL = App.sContext.getExternalCacheDir() + File.separator + "wcdog" + File.separator;
 
-    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "xandone" + File.separator + "ycat";
+    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "yandone" + File.separator + "wcdog";
 
-//------------------------SP_KEY------------------------------
+//-----------------------------SP_KEY------------------------------------
 
     public static final String USER_INFO_KEY = "Constants_USER_INFO_KEY";
 
-//------------------------SP_NAME------------------------------
+//-----------------------------SP_NAME-----------------------------------
 
     public static final String USER_INFO_NAME = "Constants_USER_INFO_NAME";
 
 
-    //------------------------INTENT_KEY------------------------------
+//----------------------------INTENT_KEY----------------------------------
 
     public static final String KEY_JOKEBEAN = "key_jokebean";
     public static final String KEY_JOKEBEAN_POSITION = "key_jokebean_position";
 
+//----------------------------HTTP-CODE------------------------------------
+
+    public static final int SUCCESS = 200;
 
 }

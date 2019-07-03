@@ -2,6 +2,7 @@ package com.xandone.dog.wcapp.model;
 
 import com.xandone.dog.wcapp.api.http.HttpHelper;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
+import com.xandone.dog.wcapp.model.bean.ApkBean;
 import com.xandone.dog.wcapp.model.bean.CommentBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.bean.UserBean;
@@ -82,6 +83,11 @@ public class DataManager implements HttpHelper {
     @Override
     public Flowable<BaseResponse<List<UserBean>>> updateUserInfo(String userId, String talk, String address) {
         return mHttpHelper.updateUserInfo(userId, talk, address);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<ApkBean>>> getLastVersion() {
+        return mHttpHelper.getLastVersion();
     }
 
 

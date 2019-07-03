@@ -33,8 +33,7 @@ public class JokeDetailsPresenter extends RxPresenter<JokeDetailsContact.View> i
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse>(view) {
                     @Override
-                    public void onNext(BaseResponse baseResponse) {
-                        super.onNext(baseResponse);
+                    public void onSuccess(BaseResponse baseResponse) {
                         view.showContent(baseResponse);
                     }
                 })
@@ -48,8 +47,7 @@ public class JokeDetailsPresenter extends RxPresenter<JokeDetailsContact.View> i
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse>(view) {
                     @Override
-                    public void onNext(BaseResponse baseResponse) {
-                        super.onNext(baseResponse);
+                    public void onSuccess(BaseResponse baseResponse) {
                         view.thumbsJokeResult(baseResponse);
                     }
                 })

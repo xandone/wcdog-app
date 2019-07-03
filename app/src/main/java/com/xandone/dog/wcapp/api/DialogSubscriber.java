@@ -38,6 +38,11 @@ public class DialogSubscriber<T> extends CommonSubscriber<T> {
         super.onError(t);
     }
 
+    @Override
+    public void onSuccess(T t) {
+
+    }
+
     protected void showLoadingDialog(boolean cancelable) {
         showLoadingDialog("正在请求...", cancelable);
     }

@@ -13,6 +13,7 @@ import com.xandone.dog.wcapp.model.base.BaseResponse;
 import com.xandone.dog.wcapp.model.bean.UserBean;
 import com.xandone.dog.wcapp.uitils.GsonUtil;
 import com.xandone.dog.wcapp.uitils.SPUtils;
+import com.xandone.dog.wcapp.uitils.SimpleUtils;
 import com.xandone.dog.wcapp.uitils.ToastUtils;
 
 import java.util.List;
@@ -44,10 +45,9 @@ public class RegistPresenter extends RxPresenter<RegistContact.View> implements 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new CommonSubscriber<BaseResponse<List<UserBean>>>(view) {
                     @Override
-                    public void onNext(BaseResponse<List<UserBean>> baseResponse) {
+                    public void onSuccess(BaseResponse<List<UserBean>> baseResponse) {
                         if (baseResponse != null) {
-                            if (baseResponse.getCode() == 200 && baseResponse.getData() != null
-                                    && !baseResponse.getData().isEmpty()) {
+                            if (baseResponse.getCode() == 200 && !SimpleUtils.isEmpty(baseResponse.getData())) {
                                 UserBean loginBean = baseResponse.getData().get(0);
                                 loginBean.setName(name);
                                 loginBean.setPassword(psw);

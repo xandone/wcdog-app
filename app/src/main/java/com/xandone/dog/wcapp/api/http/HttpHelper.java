@@ -2,6 +2,7 @@ package com.xandone.dog.wcapp.api.http;
 
 
 import com.xandone.dog.wcapp.model.base.BaseResponse;
+import com.xandone.dog.wcapp.model.bean.ApkBean;
 import com.xandone.dog.wcapp.model.bean.CommentBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.bean.UserBean;
@@ -43,6 +44,8 @@ public interface HttpHelper {
     Flowable<BaseResponse<List<JokeBean>>> dealSearchJokes(int page, int row, String key);
 
     Flowable<BaseResponse<List<UserBean>>> updateUserInfo(String userId, String talk, String address);
+
+    Flowable<BaseResponse<List<ApkBean>>> getLastVersion();
 
 
 }

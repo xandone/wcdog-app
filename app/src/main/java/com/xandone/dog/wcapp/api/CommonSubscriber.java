@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.xandone.dog.wcapp.base.BaseView;
 import com.xandone.dog.wcapp.exception.ApiException;
 import com.xandone.dog.wcapp.uitils.LogUtils;
+import com.xandone.dog.wcapp.uitils.SimpleUtils;
 import com.xandone.dog.wcapp.uitils.ToastUtils;
 import com.xandone.dog.wcapp.widget.LoadingLayout;
 
@@ -16,7 +17,7 @@ import retrofit2.HttpException;
  * created on: 2019/3/29 14:01
  */
 
-public class CommonSubscriber<T> extends ResourceSubscriber<T> {
+public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
     private BaseView mView;
     private String mErrorMsg;
     private boolean isShowErrorState;
@@ -44,6 +45,10 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
 
     @Override
     public void onNext(T t) {
+        if (!SimpleUtils.isNetworkConnected()) {
+            ToastUtils.showShort("无法连接，请检查网络");
+        }
+        onSuccess(t);
     }
 
     @Override
@@ -66,11 +71,16 @@ public class CommonSubscriber<T> extends ResourceSubscriber<T> {
             mView.stateError();
         }
 
-        ToastUtils.showShort("服务器异常,请稍后再试");
+        ApiException ex = ApiException.handleException(t);
+        if (!TextUtils.isEmpty(ex.getMessage())) {
+            ToastUtils.showShort(ex.getMessage());
+        }
     }
 
     @Override
     public void onComplete() {
 
     }
+
+    public abstract void onSuccess(T t);
 }

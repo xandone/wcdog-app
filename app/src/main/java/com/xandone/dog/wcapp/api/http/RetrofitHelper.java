@@ -4,6 +4,7 @@ package com.xandone.dog.wcapp.api.http;
 import com.xandone.dog.wcapp.api.Api;
 import com.xandone.dog.wcapp.api.KyApi;
 import com.xandone.dog.wcapp.model.base.BaseResponse;
+import com.xandone.dog.wcapp.model.bean.ApkBean;
 import com.xandone.dog.wcapp.model.bean.CommentBean;
 import com.xandone.dog.wcapp.model.bean.JokeBean;
 import com.xandone.dog.wcapp.model.bean.UserBean;
@@ -92,6 +93,11 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<BaseResponse<List<UserBean>>> updateUserInfo(String userId, String talk, String address) {
         return mApi.updateUserInfo(userId, talk, address);
+    }
+
+    @Override
+    public Flowable<BaseResponse<List<ApkBean>>> getLastVersion() {
+        return mApi.getLastVersion();
     }
 
 }

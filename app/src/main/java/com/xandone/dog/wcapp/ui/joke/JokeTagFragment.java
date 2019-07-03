@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.SearchEvent;
 import android.view.View;
 import android.widget.ImageView;
 

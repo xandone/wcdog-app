@@ -1,5 +1,6 @@
 package com.xandone.dog.wcapp.di.component;
 
+import com.xandone.dog.wcapp.MainActivity;
 import com.xandone.dog.wcapp.di.module.ActivityModule;
 import com.xandone.dog.wcapp.di.scope.ActivityScope;
 import com.xandone.dog.wcapp.ui.comment.JokeCommentActivity;
@@ -32,5 +33,7 @@ public interface ActivityComponent {
     void inject(JokeCommentActivity jokeCommentActivity);
 
     void inject(PersonalEditActivity personalEditActivity);
+
+    void inject(MainActivity mainActivity);
 
 }

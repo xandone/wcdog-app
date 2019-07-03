@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.xandone.dog.wcapp.base.BaseRxActivity;
+import com.xandone.dog.wcapp.interfs.MaterialDialogOnclickListener;
+import com.xandone.dog.wcapp.model.bean.ApkBean;
+import com.xandone.dog.wcapp.ui.MainContact;
+import com.xandone.dog.wcapp.ui.MainPresenter;
 import com.xandone.dog.wcapp.ui.joke.JokeFragment;
 import com.xandone.dog.wcapp.ui.personal.PersonalFragment;
 import com.xandone.dog.wcapp.ui.video.VideoListFragment;
+import com.xandone.dog.wcapp.uitils.MaterialDialogUtils;
 import com.xandone.dog.wcapp.uitils.ToastUtils;
 
 import java.util.ArrayList;
@@ -26,7 +30,7 @@ import butterknife.BindView;
  * author: xandone
  * created on: 2019/3/5 16:30
  */
-public class MainActivity extends BaseRxActivity {
+public class MainActivity extends BaseRxActivity<MainPresenter> implements MainContact.MyView {
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
 
@@ -43,7 +47,7 @@ public class MainActivity extends BaseRxActivity {
 
     @Override
     public void initInject() {
-
+        getActivityComponent().inject(this);
     }
 
     @Override
@@ -81,6 +85,8 @@ public class MainActivity extends BaseRxActivity {
                 turnToFrag();
             }
         });
+
+        mPresenter.getLastVersion();
     }
 
     public void turnToFrag() {
@@ -97,6 +103,17 @@ public class MainActivity extends BaseRxActivity {
         }
         ft.commitAllowingStateLoss();
         mCurrentFrag = toFragment;
+    }
+
+    @Override
+    public void showResult(ApkBean apkBean) {
+        MaterialDialogUtils.showSimpleDialog(this, apkBean.getContent(), "取消", "下载更新",
+                new MaterialDialogOnclickListener() {
+                    @Override
+                    public void onConfirm() {
+
+                    }
+                });
     }
 
     @Override

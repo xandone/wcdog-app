@@ -27,8 +27,6 @@ public class SplashAvtivity extends BaseRxActivity<SplashPresenter> implements S
     @BindView(R.id.act_splash_bg)
     ImageView act_splash_bg;
 
-    public static final String img_Url = "https://upload-images.jianshu.io/upload_images/2518499-5922e67cdc70350f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-
     private ImageLoadInterface<ImageView> mLoader;
 
     @Override
