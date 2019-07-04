@@ -15,9 +15,9 @@ android {
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
 
-        ndk {
-            abiFilters "armeabi"
-        }
+//        ndk {
+//            abiFilters "armeabi"
+//        }
 
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
@@ -26,6 +26,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a', 'x86_64'
+            universalApk true
         }
     }
 }

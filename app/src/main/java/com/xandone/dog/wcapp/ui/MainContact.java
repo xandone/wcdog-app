@@ -5,7 +5,7 @@ import com.xandone.dog.wcapp.base.BaseView;
 import com.xandone.dog.wcapp.model.bean.ApkBean;
 
 /**
- * author: Admin
+ * author: xandone
  * created on: 2019/7/3 14:21
  * description:
  */

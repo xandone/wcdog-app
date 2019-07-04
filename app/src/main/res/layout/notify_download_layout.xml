@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/notify_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/wc_app" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/notify_icon"
+        android:paddingTop="10dp">
+
+        <ProgressBar
+            android:id="@+id/notify_pb"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/notify_speed"
+            tools:progress="30" />
+
+        <TextView
+            android:id="@+id/notify_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/notify_progress"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            tools:text="126Kb%s" />
+
+        <TextView
+            android:id="@+id/notify_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            tools:text="10%" />
+
+        <TextView
+            android:id="@+id/notify_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notify_pb"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            tools:text="12/30Mb" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/notify_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/notify_cancel"
+        android:padding="10dp"
+        android:text="暂停"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/notify_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:text="取消"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
+
+
+</RelativeLayout>

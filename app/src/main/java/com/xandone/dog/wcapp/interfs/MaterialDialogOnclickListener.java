@@ -1,7 +1,7 @@
 package com.xandone.dog.wcapp.interfs;
 
 /**
- * author: Admin
+ * author: xandone
  * created on: 2019/7/3 18:42
  * description:
  */

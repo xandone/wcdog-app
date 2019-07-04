@@ -10,11 +10,14 @@ import com.roughike.bottombar.OnTabSelectListener;
 import com.xandone.dog.wcapp.base.BaseRxActivity;
 import com.xandone.dog.wcapp.interfs.MaterialDialogOnclickListener;
 import com.xandone.dog.wcapp.model.bean.ApkBean;
+import com.xandone.dog.wcapp.service.LoadApkService;
+import com.xandone.dog.wcapp.service.NotificationChannelHelper;
 import com.xandone.dog.wcapp.ui.MainContact;
 import com.xandone.dog.wcapp.ui.MainPresenter;
 import com.xandone.dog.wcapp.ui.joke.JokeFragment;
 import com.xandone.dog.wcapp.ui.personal.PersonalFragment;
 import com.xandone.dog.wcapp.ui.video.VideoListFragment;
+import com.xandone.dog.wcapp.uitils.ApkUtils;
 import com.xandone.dog.wcapp.uitils.MaterialDialogUtils;
 import com.xandone.dog.wcapp.uitils.ToastUtils;
 
@@ -86,6 +89,7 @@ public class MainActivity extends BaseRxActivity<MainPresenter> implements MainC
             }
         });
 
+        NotificationChannelHelper.initChannel(this);
         mPresenter.getLastVersion();
     }
 
@@ -106,14 +110,18 @@ public class MainActivity extends BaseRxActivity<MainPresenter> implements MainC
     }
 
     @Override
-    public void showResult(ApkBean apkBean) {
-        MaterialDialogUtils.showSimpleDialog(this, apkBean.getContent(), "取消", "下载更新",
-                new MaterialDialogOnclickListener() {
-                    @Override
-                    public void onConfirm() {
-
-                    }
-                });
+    public void showResult(final ApkBean apkBean) {
+        if (ApkUtils.getVersionCode(this) < apkBean.getApkCode()) {
+            MaterialDialogUtils.showSimpleDialog(this, apkBean.getContent(), "取消", "下载更新",
+                    new MaterialDialogOnclickListener() {
+                        @Override
+                        public void onConfirm() {
+                            Intent intent = new Intent(MainActivity.this, LoadApkService.class);
+                            intent.putExtra("mApkBean", apkBean);
+                            startService(intent);
+                        }
+                    });
+        }
     }
 
     @Override

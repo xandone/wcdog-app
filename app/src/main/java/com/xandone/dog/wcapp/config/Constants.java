@@ -32,7 +32,7 @@ public class Constants {
 
     public static final String PATH_CACHE_EXTERNAL = App.sContext.getExternalCacheDir() + File.separator + "wcdog" + File.separator;
 
-    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "yandone" + File.separator + "wcdog";
+    public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "xandone" + File.separator + "wcdog";
 
 //-----------------------------SP_KEY------------------------------------
 
@@ -51,5 +51,10 @@ public class Constants {
 //----------------------------HTTP-CODE------------------------------------
 
     public static final int SUCCESS = 200;
+
+
+//----------------------------HTTP-CODE------------------------------------
+
+    public static final int APK_DOWNLOAD_NOTIFICATION_ID = 1;
 
 }

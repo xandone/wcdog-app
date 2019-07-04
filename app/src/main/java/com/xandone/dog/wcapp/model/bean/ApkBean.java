@@ -1,18 +1,20 @@
 package com.xandone.dog.wcapp.model.bean;
 
 
+import java.io.Serializable;
+
 /**
  * author: Admin
  * created on: 2019/7/3 14:26
  * description:
  */
-public class ApkBean {
+public class ApkBean implements Serializable {
     private String apkId;
     private String apkVersion;
+    private String apkUrl;
     private int apkCode;
     private String content;
     private String sendTime;
-    private String token;
 
     public String getApkId() {
         return apkId;
@@ -54,11 +56,11 @@ public class ApkBean {
         this.sendTime = sendTime;
     }
 
-    public String getToken() {
-        return token;
+    public String getApkUrl() {
+        return apkUrl;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setApkUrl(String apkUrl) {
+        this.apkUrl = apkUrl;
     }
 }
