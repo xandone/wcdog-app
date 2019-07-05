@@ -10,15 +10,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
-import com.liulishuo.okdownload.DownloadListener;
 import com.liulishuo.okdownload.DownloadTask;
+import com.liulishuo.okdownload.SpeedCalculator;
+import com.liulishuo.okdownload.core.Util;
+import com.liulishuo.okdownload.core.breakpoint.BlockInfo;
 import com.liulishuo.okdownload.core.breakpoint.BreakpointInfo;
 import com.liulishuo.okdownload.core.cause.EndCause;
-import com.liulishuo.okdownload.core.cause.ResumeFailedCause;
+import com.liulishuo.okdownload.core.listener.DownloadListener4WithSpeed;
+import com.liulishuo.okdownload.core.listener.assist.Listener4SpeedAssistExtend;
 import com.orhanobut.logger.Logger;
 import com.xandone.dog.wcapp.R;
 import com.xandone.dog.wcapp.config.Constants;
 import com.xandone.dog.wcapp.model.bean.ApkBean;
+import com.xandone.dog.wcapp.uitils.ApkUtils;
 
 import java.io.File;
 import java.util.List;
@@ -33,6 +37,7 @@ import java.util.Map;
 public class LoadApkService extends Service {
 
     private ApkBean mApkBean;
+    private String apkPath;
 
     private static final String KEY_ACTION = "key_action";
     private static final int ACTION_PAUSE = 1;
@@ -54,7 +59,6 @@ public class LoadApkService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Logger.d("执行....");
         mApkBean = (ApkBean) intent.getSerializableExtra("mApkBean");
-        startNotification(ACTION_PAUSE, 18, "6/40Mb", 122);
         downLoadApk(mApkBean.getApkUrl(), Constants.PATH_SDCARD, "wcdog" + mApkBean.getApkVersion() + ".apk");
         return START_NOT_STICKY;
     }
@@ -66,37 +70,55 @@ public class LoadApkService extends Service {
                 return;
             }
         }
-        File currentFile = new File(path, filename);
-        DownloadTask task = new DownloadTask.Builder(url, currentFile)
+        apkPath = Constants.PATH_SDCARD + File.separator + filename;
+        DownloadTask task = new DownloadTask.Builder(url, appDir)
                 .setFilename(filename)
                 // the minimal interval millisecond for callback progress
                 .setMinIntervalMillisCallbackProcess(15)
                 // do re-download even if the task has already been completed in the past.
                 .setPassIfAlreadyCompleted(false)
                 .build();
-        task.enqueue(new DownloadListener() {
+        task.enqueue(new DownloadListener4WithSpeed() {
+            private long totalLength;
+            private String readableTotalLength;
+
+            @Override
+            public void infoReady(@NonNull DownloadTask task, @NonNull BreakpointInfo info, boolean fromBreakpoint, @NonNull Listener4SpeedAssistExtend.Listener4SpeedModel model) {
+                totalLength = info.getTotalLength();
+                readableTotalLength = Util.humanReadableBytes(totalLength, true);
+                startNotification(ACTION_PAUSE, 0, 0 + "/" + readableTotalLength, "0");
+            }
+
+            @Override
+            public void progressBlock(@NonNull DownloadTask task, int blockIndex, long currentBlockOffset, @NonNull SpeedCalculator blockSpeed) {
+
+            }
+
+            @Override
+            public void progress(@NonNull DownloadTask task, long currentOffset, @NonNull SpeedCalculator taskSpeed) {
+                String readableOffset = Util.humanReadableBytes(currentOffset, true);
+                String progressStatus = readableOffset + "/" + readableTotalLength;
+                String speed = taskSpeed.speed();
+                float percent = (float) currentOffset / totalLength;
+
+                Logger.d(percent);
+
+                startNotification(ACTION_PAUSE, (int) (percent * 100), progressStatus, speed);
+            }
+
+            @Override
+            public void blockEnd(@NonNull DownloadTask task, int blockIndex, BlockInfo info, @NonNull SpeedCalculator blockSpeed) {
+
+            }
+
+            @Override
+            public void taskEnd(@NonNull DownloadTask task, @NonNull EndCause cause, @Nullable Exception realCause, @NonNull SpeedCalculator taskSpeed) {
+                ApkUtils.installApk(LoadApkService.this, apkPath);
+                stopForeground(true);
+            }
+
             @Override
             public void taskStart(@NonNull DownloadTask task) {
-
-            }
-
-            @Override
-            public void connectTrialStart(@NonNull DownloadTask task, @NonNull Map<String, List<String>> requestHeaderFields) {
-
-            }
-
-            @Override
-            public void connectTrialEnd(@NonNull DownloadTask task, int responseCode, @NonNull Map<String, List<String>> responseHeaderFields) {
-
-            }
-
-            @Override
-            public void downloadFromBeginning(@NonNull DownloadTask task, @NonNull BreakpointInfo info, @NonNull ResumeFailedCause cause) {
-
-            }
-
-            @Override
-            public void downloadFromBreakpoint(@NonNull DownloadTask task, @NonNull BreakpointInfo info) {
 
             }
 
@@ -110,29 +132,11 @@ public class LoadApkService extends Service {
 
             }
 
-            @Override
-            public void fetchStart(@NonNull DownloadTask task, int blockIndex, long contentLength) {
 
-            }
-
-            @Override
-            public void fetchProgress(@NonNull DownloadTask task, int blockIndex, long increaseBytes) {
-
-            }
-
-            @Override
-            public void fetchEnd(@NonNull DownloadTask task, int blockIndex, long contentLength) {
-
-            }
-
-            @Override
-            public void taskEnd(@NonNull DownloadTask task, @NonNull EndCause cause, @Nullable Exception realCause) {
-
-            }
         });
     }
 
-    private void startNotification(int action, int progress, String fileSize, int speed) {
+    private void startNotification(int action, int progress, String fileSize, String speed) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationChannelHelper.CHANNEL_ID_FOR_UPDATE);
         builder.setContentTitle("正在下载");
         //只响铃震动一次
@@ -146,7 +150,7 @@ public class LoadApkService extends Service {
         } else {
             remoteViews.setTextViewText(R.id.notify_pause, "暂停");
         }
-        remoteViews.setTextViewText(R.id.notify_speed, speed + "KB/s");
+        remoteViews.setTextViewText(R.id.notify_speed, speed);
         remoteViews.setTextViewText(R.id.notify_progress, progress + "%");
 
         remoteViews.setProgressBar(R.id.notify_pb, 100, progress, false);
@@ -166,4 +170,5 @@ public class LoadApkService extends Service {
         int id = Constants.APK_DOWNLOAD_NOTIFICATION_ID;
         startForeground(id, notification);
     }
+
 }

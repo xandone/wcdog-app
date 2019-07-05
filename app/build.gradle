@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+import com.android.builder.core.BuilderConstants
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -15,9 +16,9 @@ android {
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
 
-//        ndk {
-//            abiFilters "armeabi"
-//        }
+        ndk {
+            abiFilters "armeabi"
+        }
 
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
@@ -29,12 +30,36 @@ android {
         }
     }
 
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86', 'armeabi-v7a', 'x86_64'
-            universalApk true
+//    splits {
+//        abi {
+//            enable true
+//            reset()
+//            include 'x86', 'armeabi-v7a', 'x86_64'
+//            universalApk true
+//        }
+//    }
+
+    //apk名字,AS3.0后outputFile变为只读
+    android.applicationVariants.all { variant ->
+        def buildTypeName = variant.buildType.name
+        if (buildTypeName.equals(BuilderConstants.DEBUG)) {
+            //定义debug版本的apk文件名
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    def fileName = "app_wcdog_debug.apk"
+                    outputFileName = fileName
+                }
+            }
+            return
+        }
+
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "app_wcdog_release.apk"
+                outputFileName = fileName
+            }
         }
     }
 }
@@ -59,7 +84,7 @@ dependencies {
     implementation rootProject.ext.dependencies["html-textview"]
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["SmartRefreshLayout"]
-    implementation rootProject.ext.dependencies["photopick"]
+    implementation rootProject.ext.dependencies["matisse"]
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     implementation rootProject.ext.dependencies["bottom-bar"]
     implementation rootProject.ext.dependencies["shinebutton"]
@@ -78,6 +103,7 @@ dependencies {
     implementation rootProject.ext.dependencies["okhttp-logging-interceptor"]
     implementation rootProject.ext.dependencies["glide"]
     implementation rootProject.ext.dependencies["glide-okhttp3-integration"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     //di
     implementation rootProject.ext.dependencies["dagger"]
     implementation rootProject.ext.dependencies["dagger-compiler"]
@@ -92,6 +118,8 @@ dependencies {
     implementation rootProject.ext.dependencies["filedownloader"]
     implementation rootProject.ext.dependencies["okdownloadSqlite"]
     implementation rootProject.ext.dependencies["eventbus"]
+    implementation rootProject.ext.dependencies["easypermissions"]
+    implementation rootProject.ext.dependencies["rxpermissions"]
     //canary
     debugImplementation rootProject.ext.dependencies["blockcanary-android"]
     releaseImplementation rootProject.ext.dependencies["blockcanary-no-op"]

@@ -1,11 +1,11 @@
 ext {
 
     android = [
-            compileSdkVersion: 27,
+            compileSdkVersion: 28,
             buildToolsVersion: '27.0.3',
             applicationId    : "com.xandone.dog.wcapp",
             minSdkVersion    : 19,
-            targetSdkVersion : 26,
+            targetSdkVersion : 28,
             versionCode      : 1,
             versionName      : "1.0.0"
     ]
@@ -37,7 +37,7 @@ ext {
             "html-textview"                : "org.sufficientlysecure:html-textview:3.1",
             "constraint-layout"            : "com.android.support.constraint:constraint-layout:1.1.3",
             "SmartRefreshLayout"           : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14",
-            "photopick"                    : "me.iwf.photopicker:PhotoPicker:0.9.5@aar",
+            "matisse"                      : "com.zhihu.android:matisse:0.5.1",
             "BaseRecyclerViewAdapterHelper": "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38",
             "bottom-bar"                   : "com.roughike:bottom-bar:2.3.1",
             "shinebutton"                  : "com.sackcentury:shinebutton:0.2.0",
@@ -56,8 +56,9 @@ ext {
             "retrofit-adapter-rxjava2"     : "com.squareup.retrofit2:adapter-rxjava2:${dependVersion.retrofit}",
             "okhttp"                       : "com.squareup.okhttp3:okhttp:${dependVersion.okhttp}",
             "okhttp-logging-interceptor"   : "com.squareup.okhttp3:logging-interceptor:${dependVersion.okhttp}",
-            "glide"                        : "com.github.bumptech.glide:glide:3.7.0",
+            "glide"                        : "com.github.bumptech.glide:glide:4.9.0",
             "glide-okhttp3-integration"    : "com.github.bumptech.glide:okhttp3-integration:1.4.0@aar",
+            "glide-compiler"               : "com.github.bumptech.glide:compiler:4.9.0",
 
             //di
             "dagger"                       : "com.google.dagger:dagger:${dependVersion.dagger2}",
@@ -74,6 +75,8 @@ ext {
             "filedownloader"               : "com.liulishuo.okdownload:okdownload:1.0.5",
             "okdownloadSqlite"             : "com.liulishuo.okdownload:sqlite:1.0.5",
             "eventbus"                     : "org.greenrobot:eventbus:3.1.1",
+            "easypermissions"              : "pub.devrel:easypermissions:2.0.1",
+            "rxpermissions"                : "com.github.tbruyelle:rxpermissions:0.10.2",
 
             //canary
             "blockcanary-android"          : "com.github.moduth:blockcanary-android:${dependVersion.blockcanary}",

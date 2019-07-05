@@ -1,13 +1,17 @@
 package com.xandone.dog.wcapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.xandone.dog.wcapp.base.BaseRxActivity;
+import com.xandone.dog.wcapp.config.MyPermission;
 import com.xandone.dog.wcapp.interfs.MaterialDialogOnclickListener;
 import com.xandone.dog.wcapp.model.bean.ApkBean;
 import com.xandone.dog.wcapp.service.LoadApkService;
@@ -28,6 +32,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * author: xandone
@@ -40,6 +47,7 @@ public class MainActivity extends BaseRxActivity<MainPresenter> implements MainC
     private int mFragIndex;
     private Fragment mCurrentFrag;
     private List<Fragment> fragList;
+    private ApkBean mApkBean;
 
     private boolean isState = true;
 
@@ -112,12 +120,13 @@ public class MainActivity extends BaseRxActivity<MainPresenter> implements MainC
     @Override
     public void showResult(final ApkBean apkBean) {
         if (ApkUtils.getVersionCode(this) < apkBean.getApkCode()) {
+            this.mApkBean = apkBean;
             MaterialDialogUtils.showSimpleDialog(this, apkBean.getContent(), "取消", "下载更新",
                     new MaterialDialogOnclickListener() {
                         @Override
                         public void onConfirm() {
                             Intent intent = new Intent(MainActivity.this, LoadApkService.class);
-                            intent.putExtra("mApkBean", apkBean);
+                            intent.putExtra("mApkBean", mApkBean);
                             startService(intent);
                         }
                     });
@@ -139,6 +148,4 @@ public class MainActivity extends BaseRxActivity<MainPresenter> implements MainC
             AppManager.newInstance().finishAllActivity();
         }
     }
-
-
 }
