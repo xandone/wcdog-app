@@ -23,7 +23,7 @@ vue+vuex+vue Router+element<br/>
 - [ ] 其他
 
 ### 效果图预览
-![](https://github.com/xandone/wcdog-app/tree/master/pic/1.png)
-![](https://github.com/xandone/wcdog-app/tree/master/pic/2.png)
-![](https://github.com/xandone/wcdog-app/tree/master/pic/3.png)
-![](https://github.com/xandone/wcdog-app/tree/master/pic/4.png)
+<img width="270" height="480" src="https://github.com/xandone/wcdog-app/blob/master/pic/1.png"></img>
+<img width="270" height="480" src="https://github.com/xandone/wcdog-app/blob/master/pic/2.png"></img>
+<img width="270" height="480" src="https://github.com/xandone/wcdog-app/blob/master/pic/3.png"></img>
+<img width="270" height="480" src="https://github.com/xandone/wcdog-app/blob/master/pic/4.png"></img>
